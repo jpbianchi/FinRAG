@@ -9,8 +9,8 @@ ENV ENVIRONMENT=dev
 
 ENV $(cat /run/secrets/FINRAG_WEAVIATE_API_KEY)
 ENV $(cat /run/secrets/FINRAG_WEAVIATE_ENDPOINT)
-ENV LLAMA_PARSE_API_KEY=$(cat /run/secrets/LLAMA_PARSE_API_KEY)
-ENV OPENAI_API_KEY=$(cat /run/secrets/OPENAI_API_KEY)
+ENV $(cat /run/secrets/LLAMA_PARSE_API_KEY)
+ENV $(cat /run/secrets/OPENAI_API_KEY)
 # ^ https://huggingface.co/docs/hub/en/spaces-sdks-docker#secrets
 
 COPY ./app /app
