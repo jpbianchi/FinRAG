@@ -7,12 +7,6 @@ ENV PYTHONUNBUFFERED 1
 
 ENV ENVIRONMENT=dev 
 
-ENV FINRAG_WEAVIATE_API_KEY=$FINRAG_WEAVIATE_API_KEY
-ENV FINRAG_WEAVIATE_ENDPOINT=$FINRAG_WEAVIATE_ENDPOINT
-ENV $(cat /run/secrets/LLAMA_PARSE_API_KEY)
-ENV $(cat /run/secrets/OPENAI_API_KEY)
-# ^ https://huggingface.co/docs/hub/en/spaces-sdks-docker#secrets
-
 COPY ./app /app
 WORKDIR /app
 RUN mkdir /data
@@ -22,6 +16,7 @@ RUN pip install --no-cache-dir --upgrade -r requirements.txt
 
 # RUN python -c "import nltk; nltk.download('stopwords')"
 # ^ to fix runtime error, see https://github.com/run-llama/llama_index/issues/10681
+# it didn't work, I had to do chmod below (as also suggested in the article)
 
 RUN chmod -R 777 /usr/local/lib/python3.10/site-packages//llama_index/legacy/_static/nltk_cache
 

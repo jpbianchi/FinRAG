@@ -56,8 +56,8 @@ class VectorStore:
 
         self.model_path = model_path
         try:
-            self.api_key = os.environ['FINRAG_WEAVIATE_API_KEY']  
-            self.url =  os.environ['FINRAG_WEAVIATE_ENDPOINT']
+            self.api_key = os.environ.get('FINRAG_WEAVIATE_API_KEY')
+            self.url =  os.environ.get('FINRAG_WEAVIATE_ENDPOINT')
             self.client = WeaviateWCS(endpoint=self.url, 
                                     api_key=self.api_key, 
                                     model_name_or_path=self.model_path)
