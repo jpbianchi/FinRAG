@@ -6,7 +6,7 @@ from weaviate.classes.config import Property, DataType
 from .weaviate_interface_v4 import WeaviateWCS, WeaviateIndexer
 from .logger import logger 
 
-from settings import parquet_file
+from settings import parquet_file, s1
 
 class VectorStore:
     def __init__(self, model_path:str = 'sentence-transformers/all-mpnet-base-v2'):
@@ -58,11 +58,11 @@ class VectorStore:
         try:
             print("We were here")
             print("key", os.environ.get('FINRAG_WEAVIATE_API_KEY'))
-            self.api_key = os.environ.get('FINRAG_WEAVIATE_API_KEY')
-            self.url =  os.environ.get('FINRAG_WEAVIATE_ENDPOINT')
+            # self.api_key = os.environ.get('FINRAG_WEAVIATE_API_KEY')
+            # self.url =  os.environ.get('FINRAG_WEAVIATE_ENDPOINT')
             print('Before client creation')
-            self.client = WeaviateWCS(endpoint=self.url, 
-                                    api_key=self.api_key, 
+            self.client = WeaviateWCS(endpoint=https://finrag-uflmnhbp.weaviate.network, 
+                                    api_key=s1+'OOf', 
                                     model_name_or_path=self.model_path)
             print('After client creation')
         except Exception as e:
