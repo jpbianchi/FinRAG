@@ -56,11 +56,15 @@ class VectorStore:
 
         self.model_path = model_path
         try:
+            print("We were here")
+            print("key", os.environ.get('FINRAG_WEAVIATE_API_KEY'))
             self.api_key = os.environ.get('FINRAG_WEAVIATE_API_KEY')
             self.url =  os.environ.get('FINRAG_WEAVIATE_ENDPOINT')
+            print('Before client creation')
             self.client = WeaviateWCS(endpoint=self.url, 
                                     api_key=self.api_key, 
                                     model_name_or_path=self.model_path)
+            print('After client creation')
         except Exception as e:
             # raise Exception(f"Could not create Weaviate client: {e}")
             pass
