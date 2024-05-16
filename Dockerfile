@@ -17,6 +17,6 @@ RUN pip install --no-cache-dir --upgrade -r requirements.txt
 RUN python -c "import nltk; nltk.download('stopwords')"
 # ^ to fix runtime error, see https://github.com/run-llama/llama_index/issues/10681
 
-RUN sudo chmod -R 777 /usr/local/lib/python3.10/site-packages
+RUN chmod -R 777 /usr/local/lib/python3.10/site-packages
 
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "7860"]
