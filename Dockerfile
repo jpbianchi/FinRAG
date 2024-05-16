@@ -11,7 +11,6 @@ COPY ./app /app
 WORKDIR /app
 RUN mkdir /data
 
-
 RUN pip install --no-cache-dir --upgrade -r requirements.txt
 # ^ no caching of the packages to save space
 
@@ -22,5 +21,7 @@ RUN pip install --no-cache-dir --upgrade -r requirements.txt
 RUN chmod -R 777 /usr/local/lib/python3.10/site-packages/llama_index/legacy/_static/nltk_cache
 
 ENV TRANSFORMERS_CACHE=/usr/local/lib/python3.10/site-packages/llama_index/legacy/_static/nltk_cache
+# ^ not elegant but it works
+# HF warning says that TRANSFORMERS_CACHE will be deprecated in transformers v5, and advise to use HF_HOME
 
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "7860"]
