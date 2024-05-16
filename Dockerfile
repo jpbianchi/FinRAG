@@ -14,4 +14,7 @@ RUN mkdir /data
 RUN pip install --no-cache-dir --upgrade -r requirements.txt
 # ^ no caching of the packages to save space
 
+RUN python -c "import nltk; nltk.download('stopwords')"
+# ^ to fix runtime error, see https://github.com/run-llama/llama_index/issues/10681
+
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "7860"]
