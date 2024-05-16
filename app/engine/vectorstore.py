@@ -55,6 +55,7 @@ class VectorStore:
         }
 
         self.model_path = model_path
+        
         try:
             print("We were here")
             print("key", os.environ.get('FINRAG_WEAVIATE_API_KEY'))
@@ -62,13 +63,15 @@ class VectorStore:
             # self.url =  os.environ.get('FINRAG_WEAVIATE_ENDPOINT')
             print('Before client creation')
             self.client = WeaviateWCS(endpoint="https://finrag-uflmnhbp.weaviate.network", 
-                                    api_key=s1+'OOf', 
-                                    model_name_or_path=self.model_path)
+                                      api_key=s1+'OOf', 
+                                      model_name_or_path=self.model_path)
             print('After client creation')
+            
         except Exception as e:
             # raise Exception(f"Could not create Weaviate client: {e}")
-            pass
+            print(f"Could not create Weaviate client: {e}")
         
+        print("URL", os.environ.get('FINRAG_WEAVIATE_ENDPOINT'))
         assert self.client._client.is_live(), "Weaviate is not live"
         assert self.client._client.is_ready(), "Weaviate is not ready"
         # careful with accessing '_client' since the weaviate helper usually closes the connection every time
