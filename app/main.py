@@ -32,8 +32,6 @@ if environment == "dev":
     )
 
 try:
-    # will not work on HuggingFace
-    # and Liquidity dont' have the env anyway
     load_dotenv(find_dotenv('env'))
     
 except Exception as e:
@@ -56,7 +54,7 @@ def read_root():
 def ping():
     """ Testing """
     logger.info("Someone is pinging the server")
-    return {"answer": str(random.random() * 100)}
+    return {"answer": str(int(random.random() * 100))}
 
 
 @app.delete("/erase_data/")
@@ -168,14 +166,6 @@ async def ragit(question: Question):
     except Exception as e:
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
     
-
-# TODO 
-#   rejects searches with a search score below a threshold
-#   scrape the tables (and find a way to reject them from the text search -> LLamaparse)
-#   see why the filename in search results is always empty 
-#       -> add it to the search results to avoid confusion Google-Amazon for instance
-#   add python scripts to create index, rag etc
-
 if __name__ == '__main__':
     import uvicorn
     from os import getenv
@@ -198,34 +188,3 @@ if __name__ == '__main__':
 
 # curl -X POST http://localhost:80/ask/ -H "Content-Type: application/json" -d '{"question": "what is Amazon loss"}' 
 # curl -X POST http://localhost:80/ragit/ -H "Content-Type: application/json" -d '{"question": "Does ATT have postpaid phone customers?"}'
-
-
-# TODO 
-# import unittest
-# from unitesting_utils import load_impact_theory_data
-
-# class TestSplitContents(unittest.TestCase):
-#     '''
-#     Unit test to ensure proper functionality of split_contents function
-#     '''
-    
-#     def test_split_contents(self):
-#         import tiktoken
-#         from llama_index.text_splitter import SentenceSplitter
-        
-#         data = load_impact_theory_data()
-                
-#         subset = data[:3]
-#         chunk_size = 256
-#         chunk_overlap = 0
-#         encoding = tiktoken.encoding_for_model('gpt-3.5-turbo-0613')
-#         gpt35_txt_splitter = SentenceSplitter(chunk_size=chunk_size, tokenizer=encoding.encode, chunk_overlap=chunk_overlap)
-#         results = split_contents(subset, gpt35_txt_splitter)
-#         self.assertEqual(len(results), 3)
-#         self.assertEqual(len(results[0]), 83)
-#         self.assertEqual(len(results[1]), 178)
-#         self.assertEqual(len(results[2]), 144)
-#         self.assertTrue(isinstance(results, list))
-#         self.assertTrue(isinstance(results[0], list))
-#         self.assertTrue(isinstance(results[0][0], str))
-# unittest.TextTestRunner().run(unittest.TestLoader().loadTestsFromTestCase(TestSplitContents))

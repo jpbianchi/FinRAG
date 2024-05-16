@@ -42,7 +42,7 @@ def process_pdf(filepath:str) -> dict:
     logger.info(f"Successfully vectorized PDF content")
     return new_content
 
-def process_question(question:str) -> List[str]:
+def vector_search(question:str) -> List[str]:
     
     ans = finrag_vectorstore.hybrid_search(query=question, limit=3, alpha=0.8)
     return ans

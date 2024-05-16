@@ -62,7 +62,6 @@ class VectorStore:
             self.client = WeaviateWCS(endpoint=self.url, 
                                       api_key=self.api_key, 
                                       model_name_or_path=self.model_path)
-            print('After client creation')
             
         except Exception as e:
             # raise Exception(f"Could not create Weaviate client: {e}")
