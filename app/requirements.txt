@@ -11,6 +11,8 @@ llama-parse==0.4.2
 llama-index-readers-file==0.1.22
 nest_asyncio==1.6.0
 llama-index==0.10.37
+llama-index-core==0.10.37
+llama-index-legacy==0.9.48
 sentence-transformers==2.7.0
 fastparquet==2024.2.0
 litellm==1.37.12
