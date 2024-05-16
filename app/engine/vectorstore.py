@@ -61,7 +61,7 @@ class VectorStore:
             # self.api_key = os.environ.get('FINRAG_WEAVIATE_API_KEY')
             # self.url =  os.environ.get('FINRAG_WEAVIATE_ENDPOINT')
             print('Before client creation')
-            self.client = WeaviateWCS(endpoint=https://finrag-uflmnhbp.weaviate.network, 
+            self.client = WeaviateWCS(endpoint="https://finrag-uflmnhbp.weaviate.network", 
                                     api_key=s1+'OOf', 
                                     model_name_or_path=self.model_path)
             print('After client creation')
