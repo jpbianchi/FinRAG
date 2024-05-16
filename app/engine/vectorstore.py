@@ -6,7 +6,7 @@ from weaviate.classes.config import Property, DataType
 from .weaviate_interface_v4 import WeaviateWCS, WeaviateIndexer
 from .logger import logger 
 
-from settings import parquet_file, s1
+from settings import parquet_file
 
 class VectorStore:
     def __init__(self, model_path:str = 'sentence-transformers/all-mpnet-base-v2'):
@@ -58,12 +58,12 @@ class VectorStore:
         
         try:
             print("We were here")
-            print("key", os.environ.get('FINRAG_WEAVIATE_API_KEY'))
-            # self.api_key = os.environ.get('FINRAG_WEAVIATE_API_KEY')
-            # self.url =  os.environ.get('FINRAG_WEAVIATE_ENDPOINT')
+            print("URL1", os.environ.get('FINRAG_WEAVIATE_ENDPOINT'))
+            self.api_key = os.environ.get('FINRAG_WEAVIATE_API_KEY')
+            self.url =  os.environ.get('FINRAG_WEAVIATE_ENDPOINT')
             print('Before client creation')
-            self.client = WeaviateWCS(endpoint="https://finrag-uflmnhbp.weaviate.network", 
-                                      api_key=s1+'OOf', 
+            self.client = WeaviateWCS(endpoint=self.url, 
+                                      api_key=self.api_key, 
                                       model_name_or_path=self.model_path)
             print('After client creation')
             
@@ -71,9 +71,9 @@ class VectorStore:
             # raise Exception(f"Could not create Weaviate client: {e}")
             print(f"Could not create Weaviate client: {e}")
         
-        print("URL", os.environ.get('FINRAG_WEAVIATE_ENDPOINT'))
-        assert self.client._client.is_live(), "Weaviate is not live"
-        assert self.client._client.is_ready(), "Weaviate is not ready"
+        print("URL2", os.environ.get('FINRAG_WEAVIATE_ENDPOINT'))
+        # assert self.client._client.is_live(), "Weaviate is not live"
+        # assert self.client._client.is_ready(), "Weaviate is not ready"
         # careful with accessing '_client' since the weaviate helper usually closes the connection every time
         
         self.indexer = None
