@@ -11,8 +11,6 @@ COPY ./app /app
 WORKDIR /app
 RUN mkdir /data
 
-ENV TRANSFORMERS_CACHE=/data/cache
-RUN mkdir /data/cache
 
 RUN pip install --no-cache-dir --upgrade -r requirements.txt
 # ^ no caching of the packages to save space
@@ -21,6 +19,8 @@ RUN pip install --no-cache-dir --upgrade -r requirements.txt
 # ^ to fix runtime error, see https://github.com/run-llama/llama_index/issues/10681
 # it didn't work, I had to do chmod below (as also suggested in the article)
 
-RUN chmod -R 777 /usr/local/lib/python3.10/site-packages//llama_index/legacy/_static/nltk_cache
+RUN chmod -R 777 /usr/local/lib/python3.10/site-packages/llama_index/legacy/_static/nltk_cache
+
+ENV TRANSFORMERS_CACHE=/usr/local/lib/python3.10/site-packages/llama_index/legacy/_static/nltk_cache
 
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "7860"]
