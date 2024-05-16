@@ -11,6 +11,9 @@ COPY ./app /app
 WORKDIR /app
 RUN mkdir /data
 
+ENV TRANSFORMERS_CACHE=/data/cache
+RUN mkdir /data/cache
+
 RUN pip install --no-cache-dir --upgrade -r requirements.txt
 # ^ no caching of the packages to save space
 
