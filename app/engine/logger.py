@@ -1,6 +1,6 @@
 import os, logging
 
-environment = os.getenv("ENVIRONMENT", "dev")  # TODO put the logger creation in its own file
+environment = os.getenv("ENVIRONMENT", "dev") 
 if environment == "dev":
     logger = logging.getLogger("uvicorn")
 else:
