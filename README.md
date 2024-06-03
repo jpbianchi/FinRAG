@@ -1,15 +1,3 @@
----
-title: FinRAG
-emoji: 🐢
-colorFrom: blue
-colorTo: blue
-sdk: docker
-pinned: false
-license: mit
----
-
-Check out the configuration reference at https://huggingface.co/docs/hub/spaces-config-reference
-
 ### How to use the endpoint
 
 Please see the notebook 'app/notebooks/upload_index.ipynb' for examples of how to upload docs, index them, delete the data, erase the vector store, do a vector search or a full RAG.  
